@@ -3,6 +3,7 @@ package com.mavi.themaurus.controller;
 import com.mavi.themaurus.service.TmdbService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -22,7 +23,7 @@ public class MovieController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok()
-                .header("Content-type", "application/json")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(tmdbService.findByImdbId(imdbId));
     }
 
@@ -38,7 +39,7 @@ public class MovieController {
         }
 
         return ResponseEntity.ok()
-                .header("Content-type", "application/json")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(tmdbService.search(title, page));
     }
 }
