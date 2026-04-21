@@ -1,6 +1,5 @@
 package com.mavi.themaurus.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,7 @@ public class TmdbService {
         this.webClient = builder.baseUrl("https://api.themoviedb.org/3/").build();
     }
 
-    public Mono<String> findMovieByImdbId(String imdbId) {
+    public Mono<String> findByImdbId(String imdbId) {
 
         String request = "/find/" + imdbId + "?external_source=imdb_id&language=en-US&api_key=" + TMDB_KEY;
         return webClient.get()
@@ -33,11 +32,11 @@ public class TmdbService {
                 .bodyToMono(String.class);
     }
 
-    public Mono<String> searchMovies(String query, int page) {
+    public Mono<String> search(String title, int page) {
 
         page = Math.max(page, 1);
 
-        String request = "/search/movie?query=" + query + "&include_adult=false&language=en-US&page=" + page + "&api_key=" + TMDB_KEY;
+        String request = "/search/movie?query=" + title + "&include_adult=false&language=en-US&page=" + page + "&api_key=" + TMDB_KEY;
 
         System.out.println("Executing get request: " + request);
 

@@ -2,6 +2,7 @@ package com.mavi.themaurus.controller;
 
 import com.mavi.themaurus.service.TmdbService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -20,13 +21,15 @@ public class MovieController {
         if (imdbId == null || imdbId.isBlank()) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(tmdbService.findMovieByImdbId(imdbId));
+        return ResponseEntity.ok()
+                .header("Content-type", "application/json")
+                .body(tmdbService.findByImdbId(imdbId));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Mono<String>> searchMovies(@RequestParam String query, @RequestParam Integer page) {
+    public ResponseEntity<Mono<String>> searchMovies(@RequestParam String title, @RequestParam Integer page) {
 
-        if (query == null || query.isBlank()) {
+        if (title == null || title.isBlank()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -34,6 +37,8 @@ public class MovieController {
             page = 1;
         }
 
-        return ResponseEntity.ok(tmdbService.searchMovies(query, page));
+        return ResponseEntity.ok()
+                .header("Content-type", "application/json")
+                .body(tmdbService.search(title, page));
     }
 }
