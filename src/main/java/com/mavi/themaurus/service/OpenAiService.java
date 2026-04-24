@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Setter
 public class OpenAiService {
 
-    @Value("${WEB_SEARCH}")
+    @Value("${USE_WEB_SEARCH}")
     private boolean USE_WEB_SEARCH;
 
     private final String BASE_URL = "https://api.openai.com/v1";
