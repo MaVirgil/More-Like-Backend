@@ -1,11 +1,7 @@
 package com.mavi.themaurus.controller;
 
-import com.mavi.themaurus.service.RateLimiterService;
 import com.mavi.themaurus.service.TmdbService;
-import io.github.bucket4j.Bucket;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
