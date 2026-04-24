@@ -23,6 +23,8 @@ public class OpenAiService {
 
     private final OpenAIClient client;
 
+    private final String MODEL_NAME = "gpt-5.4";
+
     public OpenAiService(OpenAIClient client) {
         this.client = client;
     }
@@ -51,11 +53,12 @@ public class OpenAiService {
         ResponseCreateParams.Builder paramBuilder = ResponseCreateParams.builder()
                 .instructions(SYSTEM_PROMPT)
                 .input(query)
-                .model("gpt-5.4")
+                .model(MODEL_NAME)
                 .reasoning(Reasoning.builder().effort(ReasoningEffort.LOW).build());
 
         if (USE_WEB_SEARCH) {
             WebSearchTool searchTool = WebSearchTool.builder().type(WebSearchTool.Type.WEB_SEARCH).build();
+
             paramBuilder.addTool(searchTool)
                     .toolChoice(ToolChoiceOptions.REQUIRED)
                     .maxToolCalls(3);
