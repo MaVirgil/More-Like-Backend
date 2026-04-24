@@ -15,11 +15,13 @@ public class TmdbService {
     @Value("${tmdb-key}")
     private String TMDB_KEY;
 
+    private final String BASE_URL = "https://api.themoviedb.org/3/";
+
     private final WebClient webClient;
 
     public TmdbService(WebClient.Builder builder) {
         System.out.println("building webclient with api key: ");
-        this.webClient = builder.baseUrl("https://api.themoviedb.org/3/").build();
+        this.webClient = builder.baseUrl(BASE_URL).build();
     }
 
     public Mono<String> findByImdbId(String imdbId) {
