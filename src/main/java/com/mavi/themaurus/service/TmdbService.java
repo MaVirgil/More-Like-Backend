@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 @Setter
 public class TmdbService {
 
-    @Value("${tmdb-key}")
+    @Value("${TMDB_KEY}")
     private String TMDB_KEY;
 
     private final String BASE_URL = "https://api.themoviedb.org/3/";
