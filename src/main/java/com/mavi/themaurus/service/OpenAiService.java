@@ -48,17 +48,20 @@ public class OpenAiService {
 
         System.out.println("use web search: " + USE_WEB_SEARCH);
 
-        WebSearchTool searchTool = WebSearchTool.builder().type(WebSearchTool.Type.WEB_SEARCH).build();
-
-        ResponseCreateParams params = ResponseCreateParams.builder()
+        ResponseCreateParams.Builder paramBuilder = ResponseCreateParams.builder()
                 .instructions(SYSTEM_PROMPT)
                 .input(query)
                 .model("gpt-5.4")
-                .addTool(searchTool)
-                .toolChoice(ToolChoiceOptions.REQUIRED)
-                .maxToolCalls(3)
-                .reasoning(Reasoning.builder().effort(ReasoningEffort.LOW).build())
-                .build();
+                .reasoning(Reasoning.builder().effort(ReasoningEffort.LOW).build());
+
+        if (USE_WEB_SEARCH) {
+            WebSearchTool searchTool = WebSearchTool.builder().type(WebSearchTool.Type.WEB_SEARCH).build();
+            paramBuilder.addTool(searchTool)
+                    .toolChoice(ToolChoiceOptions.REQUIRED)
+                    .maxToolCalls(3);
+        }
+
+        ResponseCreateParams params = paramBuilder.build();
 
         Response response = client.responses().create(params);
 
