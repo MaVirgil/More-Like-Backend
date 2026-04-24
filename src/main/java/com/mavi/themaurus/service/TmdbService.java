@@ -20,7 +20,6 @@ public class TmdbService {
     private final WebClient webClient;
 
     public TmdbService(WebClient.Builder builder) {
-        System.out.println("building webclient with api key: ");
         this.webClient = builder.baseUrl(BASE_URL).build();
     }
 
@@ -39,8 +38,6 @@ public class TmdbService {
         page = Math.max(page, 1);
 
         String request = "/search/movie?query=" + title + "&include_adult=false&language=en-US&page=" + page + "&api_key=" + TMDB_KEY;
-
-        System.out.println("Executing get request: " + request);
 
         return webClient.get()
                 .uri(request)

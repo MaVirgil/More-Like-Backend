@@ -48,8 +48,6 @@ public class OpenAiService {
 
     public String getResponse(String query) {
 
-        System.out.println("use web search: " + USE_WEB_SEARCH);
-
         ResponseCreateParams.Builder paramBuilder = ResponseCreateParams.builder()
                 .instructions(SYSTEM_PROMPT)
                 .input(query)
