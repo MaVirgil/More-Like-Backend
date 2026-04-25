@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mavi</groupId>
-    <artifactId>themaurus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>themaurus - BACKEND</name>
-    <description>themaurus - BACKEND</description>
+    <artifactId>MoreLike</artifactId>
+    <version>0.5</version>
+    <name>More Like [BACKEND]</name>
+    <description>Backend for More Like</description>
     <url/>
     <licenses>
         <license/>
@@ -82,6 +82,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.openai</groupId>
+            <artifactId>openai-java</artifactId>
+            <version>4.32.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bucket4j</groupId>
+            <artifactId>bucket4j_jdk17-core</artifactId>
+            <version>8.18.0</version>
         </dependency>
     </dependencies>
 
