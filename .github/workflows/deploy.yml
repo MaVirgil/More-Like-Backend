@@ -13,6 +13,15 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      BUCKET_CAPACITY: 1
+      BUCKET_REFILL_AMOUNT: 1
+      BUCKET_REFILL_TIME_MINUTES: 1
+      OPENAI_API_KEY: aaaaaaaaa
+      TMDB_KEY: aaaaaaaaa
+      USE_WEB_SEARCH: false
+
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
