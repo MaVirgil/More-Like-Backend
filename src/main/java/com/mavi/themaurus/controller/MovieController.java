@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/movie")
 @AllArgsConstructor
@@ -28,7 +30,7 @@ public class MovieController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Mono<String>> searchMovies(@RequestParam String title, @RequestParam Integer page) {
+    public ResponseEntity<Mono<String>> searchMovies(@RequestParam String title, @RequestParam(required = false) Integer page) {
 
         if (title == null || title.isBlank()) {
             return ResponseEntity.badRequest().build();
