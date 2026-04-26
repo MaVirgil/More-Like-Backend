@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping
-    public ResponseEntity<String> getTest() {
-        return ResponseEntity.ok("Access granted");
+    public ResponseEntity<String> testConnection() {
+        return ResponseEntity.ok("Connected");
     }
 }
