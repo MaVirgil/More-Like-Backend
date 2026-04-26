@@ -19,6 +19,9 @@ public class OpenAiService {
     @Value("${USE_WEB_SEARCH}")
     private boolean USE_WEB_SEARCH;
 
+    @Value("${REASONING_EFFORT}")
+    private int REASONING_EFFORT;
+
     private final String BASE_URL = "https://api.openai.com/v1";
 
     private final OpenAIClient client;
@@ -30,7 +33,7 @@ public class OpenAiService {
     }
 
     private final String SYSTEM_PROMPT = """
-            Provide a list of 3 movies that share a theme/aestehic with the given input movie title.
+            Provide a list of 3 recommended movies that have a thematic/aesthetic overlap with the given input movie title.
             
             If made available, you must use web-search to verify the IMDB ID for each suggested movie.
             Response must be in the following JSON format, and should contain NOTHING but the raw json:
@@ -51,9 +54,19 @@ public class OpenAiService {
         ResponseCreateParams.Builder paramBuilder = ResponseCreateParams.builder()
                 .instructions(SYSTEM_PROMPT)
                 .input(query)
-                .model(MODEL_NAME)
-                .reasoning(Reasoning.builder().effort(ReasoningEffort.LOW).build());
+                .model(MODEL_NAME);
 
+        //determine reasoning level
+        ReasoningEffort reasoningEffort = switch(REASONING_EFFORT) {
+            case 1 -> ReasoningEffort.LOW;
+            case 2 -> ReasoningEffort.MEDIUM;
+            case 3 -> ReasoningEffort.HIGH;
+            default -> ReasoningEffort.NONE;
+        };
+
+        paramBuilder.reasoning(Reasoning.builder().effort(reasoningEffort).build());
+
+        //determine whether to use web search or not
         if (USE_WEB_SEARCH) {
             WebSearchTool searchTool = WebSearchTool.builder().type(WebSearchTool.Type.WEB_SEARCH).build();
 

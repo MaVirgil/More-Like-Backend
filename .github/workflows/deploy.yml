@@ -21,6 +21,7 @@ jobs:
       OPENAI_API_KEY: aaaaaaaaa
       TMDB_KEY: aaaaaaaaa
       USE_WEB_SEARCH: false
+      REASONING_EFFORT: 0
 
 
     steps:
